@@ -1,0 +1,10 @@
+import java.awt.event.MouseEvent;
+
+
+public class GridCellMouseEvent extends MouseEvent {
+	GridCell msEvent;
+	public GridCellMouseEvent(){
+		msEvent=new  GridCell();
+	}
+
+}

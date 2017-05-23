@@ -1,0 +1,20 @@
+import java.awt.Color;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+
+
+public  class MarzipanController implements MouseListener {
+	Grid[][] grd;
+	MarzipanForm nmrp;
+	public MarzipanController(Grid gd,MarzipanForm mrp){
+		
+	}
+	imgPanel[0][0].addMouseListener(new MouseAdapter(){
+		public void mouseClicked(MouseEvent e) {
+			e.getButton();
+		}
+		
+	    });
+
+}

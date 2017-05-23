@@ -1,0 +1,34 @@
+import java.awt.Color;
+import java.awt.Event;
+import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+
+
+public  class MarzipanController{
+	Grid grd;
+	MarzipanForm nmrp;
+	boolean isThereAnother;
+	int[] cliked=new int[2];
+	public MarzipanController(Grid gd,MarzipanForm mrp){
+		this.grd=gd;
+		this.nmrp=mrp;
+		isThereAnother=false;
+		
+	}
+	public void process(int x,int y){
+		if(isThereAnother==true){
+			grd.exchangeNeighbour(x, y, cliked[0], cliked[1]);
+			isThereAnother=false;
+			nmrp.changePanel(grd);
+		}
+		else{
+			cliked[0]=x;
+			cliked[1]=y;
+			isThereAnother=true;
+		}
+	}
+	
+	
+	}

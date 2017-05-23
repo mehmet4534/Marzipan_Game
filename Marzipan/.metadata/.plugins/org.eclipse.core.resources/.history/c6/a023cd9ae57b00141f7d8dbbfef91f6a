@@ -1,0 +1,120 @@
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.FlowLayout;
+import java.awt.GridLayout;
+import java.awt.Point;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JComponent;
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
+
+
+public class MarzipanForm extends JFrame{
+	JPanel pnl=new JPanel();
+	ImagePanel[][] imgPanel=new ImagePanel[5][5];
+	MarzipanController mrpControl;
+	public MarzipanForm(Grid mrp){
+		setLayout(new BorderLayout(5,6));
+		//setLayout(new FlowLayout());
+		//MouseAdapter m=new MouseAdapter();
+	//	pnl.setLayout(new GridLayout(5,5));
+		pnl.setBackground(Color.BLACK );
+	//	repaint();
+		setVisible(true);
+		//pnl.setBounds(20,20,5000,5000); 
+		//pnl.setLocation(0, 0);
+		//pnl.setBackground(Color.black);
+		pnl.setLayout(new FlowLayout(FlowLayout.CENTER, 0, 0) );
+		int x=10;
+		int y=10 ;
+		for( int i=0;i<5;i++){
+			for(int j=0;j<5;j++){
+				imgPanel[i][j]=new ImagePanel();
+				Point a=new Point(x,y); 
+				imgPanel[i][j].setLocation(a);
+				imgPanel[i][j].setSize(50, 50);
+				imgPanel[i][j].setBackground(imgPanel[i][j].getClr(mrp,i,j));
+				imgPanel[i][j].row=a;
+				imgPanel[i][j].addMouseListener(new MouseAdapter(){
+
+					
+					@Override
+					public void mouseClicked(MouseEvent e) {
+						// TODO Auto-generated method stub
+						System.out.println("basýldý");
+						for( int i=0;i<5;i++){
+							for(int j=0;j<5;j++){
+								System.out.println("source "+e.getComponent().getLocation().x+" "+e.getComponent().getLocation().y);
+								System.out.println("panel "+i+j+" "+imgPanel[i][j].getLocation().x+" "+imgPanel[i][j].getLocation().y);
+								if(imgPanel[i][j].getLocation().x==e.getComponent().getLocation().x&&imgPanel[i][j].getLocation().y==e.getComponent().getLocation().y)
+									mrpControl.process(i,j);
+							}
+						}
+						
+					}
+
+					@Override
+					public void mouseEntered(MouseEvent e) {
+						// TODO Auto-generated method stub
+						
+					}
+
+					@Override
+					public void mouseExited(MouseEvent e) {
+						// TODO Auto-generated method stub
+						
+					}
+
+					@Override
+					public void mousePressed(MouseEvent e) {
+						// TODO Auto-generated method stub
+						
+					}
+
+					@Override
+					public void mouseReleased(MouseEvent e) {
+						// TODO Auto-generated method stub
+						
+					}
+					
+				});
+				
+				//imgPanel[i][j].setLayout(new FlowLayout(FlowLayout.LEFT, x, y) );
+				pnl.add(imgPanel[i][j]);
+				pnl.setLayout(null);
+				x=x+70 ;
+			}
+			x=10 ;
+			y+=70 ;
+			
+		}
+		//pnl.setLocation(10,10);
+		pnl.setSize(500,500);
+		add(pnl,BorderLayout.CENTER);
+		JTextField score=new JTextField("0",12);
+		add(score,BorderLayout.EAST);
+		setSize(400,400);
+		setLocation(500,200);
+		//score.setLocation(2,2);
+		//score.setSize(12, 5);
+		add("center",pnl);
+		
+		
+		mrpControl=new MarzipanController(mrp,this);
+	}
+	public void changePanel(Grid grd){
+		for( int i=0;i<5;i++){
+			for(int j=0;j<5;j++){
+				imgPanel[i][j].setBackground(imgPanel[i][j].getClr(grd,i,j));
+			}
+		}
+	}
+	
+}

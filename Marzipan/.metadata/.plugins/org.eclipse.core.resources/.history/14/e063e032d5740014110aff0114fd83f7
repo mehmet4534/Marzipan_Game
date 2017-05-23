@@ -1,0 +1,86 @@
+
+
+
+public class Grid {
+	GridCell[][] grd;
+	
+	public Grid(){
+		grd=new GridCell[5][5];
+		for(int i=0;i<5;i++){
+			for(int j=0;j<5;j++){
+				grd[i][j]=new GridCell();
+			}
+		}
+		//compareGrid();
+	}
+	
+	public void compareGrid(){
+	
+		for(int i=0;i<5;i++){
+			for(int j=0;j<3;j++){
+				if(grd[i][j].almOfCell.clrOfAlmond==grd[i][j+1].almOfCell.clrOfAlmond&&grd[i][j+1].almOfCell.clrOfAlmond==grd[i][j+2].almOfCell.clrOfAlmond){
+					if(j<2 && grd[i][j].almOfCell.clrOfAlmond==grd[i][j+3].almOfCell.clrOfAlmond){
+						if(j<1 && grd[i][j].almOfCell.clrOfAlmond==grd[i][j+4].almOfCell.clrOfAlmond){	
+						while(j<5){
+							if(grd[i][j].empty==false)
+								grd[i][j++].empty=true;
+						}
+						}
+						int k=j;
+						while(j<4+k){
+							if(grd[i][j].empty==false)
+								grd[i][j++].empty=true;
+						}
+					}
+					int k=j;
+					while(j<3+k){
+						if(grd[i][j].empty==false)
+							grd[i][j++].empty=true;
+					}
+				}
+			}
+			for(int j=0;j<3;j++){
+				if(grd[j][i].almOfCell.clrOfAlmond==grd[j+1][i].almOfCell.clrOfAlmond&&grd[j+1][i].almOfCell.clrOfAlmond==grd[j+2][i].almOfCell.clrOfAlmond){
+					if(j<2 && grd[j][i].almOfCell.clrOfAlmond==grd[j+3][i].almOfCell.clrOfAlmond){
+						if(j<1 && grd[j][i].almOfCell.clrOfAlmond==grd[j+4][i].almOfCell.clrOfAlmond){	
+						while(j<5){
+							if(grd[j][i].empty==false)
+								grd[j++][i].empty=true;
+						}
+						}
+						int k=j;
+						while(j<4+k){
+							if(grd[j][i].empty==false)
+								grd[j++][i].empty=true;
+						}
+					}
+					int k=j;
+					while(j<3+k){
+						if(grd[j][i].empty==false)
+							grd[j++][i].empty=true;
+					}
+				}
+			}
+		}
+		int a=0;
+		for(int i=0;i<5;i++){
+			for(int j=0;j<5;j++){
+				if(grd[i][j].empty==true){
+					exchange(i,j);
+					grd[i][j].empty=false;
+					a=1;
+				}
+			}
+		}
+		if(a==1)
+			compareGrid();
+		return;
+	}
+	public void exchange(int row,int column){
+		while(row>=1){
+			grd[row][column]=grd[--row][column];
+		}
+		grd[0][column].almOfCell=new Almond();
+		
+	}
+}

@@ -1,0 +1,45 @@
+import java.awt.Color;
+import java.awt.FlowLayout;
+import java.awt.GridLayout;
+
+import javax.swing.ImageIcon;
+import javax.swing.JComponent;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+
+
+public class MarzipanForm extends JFrame{
+	JPanel pnl=new JPanel();
+	ImagePanel[][] imgPanel=new ImagePanel[5][5];
+	public MarzipanForm(Grid mrp){
+		setSize(400,400);
+		setLocation(500,200);
+	//	pnl.setLayout(new GridLayout(5,5));
+		pnl.setBackground(Color.BLACK );
+	//	repaint();
+		setVisible(true);
+		
+		pnl.setBounds(0, 0,400,400); 
+		//pnl.setLocation(0, 0);
+		//pnl.setBackground(Color.black);
+		pnl.setLayout(new FlowLayout(FlowLayout.CENTER, 0, 0) );
+		int x=10 ;
+		int y=10 ;
+		for(int i=0;i<5;i++){
+			for(int j=0;j<5;j++){
+				imgPanel[i][j]=new ImagePanel();
+				imgPanel[i][j].setBounds(x, y,50,50    );
+				imgPanel[i][j].setBackground(imgPanel[i][j].getClr(mrp,i,j));
+				
+				//imgPanel[i][j].setLayout(new FlowLayout(FlowLayout.LEFT, x, y) );
+				pnl.add(imgPanel[i][j]);
+				x=x+70 ;
+			}
+			x=10 ;
+			y+=70 ;
+			
+		}
+		add(pnl);
+		
+	}
+}
